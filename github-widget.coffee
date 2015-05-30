@@ -1,5 +1,5 @@
 ###
-# to minify: 
+# to minify:
 java -jar /usr/local/closure-compiler/compiler.jar \
   --compilation_level SIMPLE_OPTIMIZATIONS \
   --js github-widget.js \
@@ -12,9 +12,11 @@ Released under the MIT licence: http://opensource.org/licenses/mit-license ###
 
 makeWidget = (payload, div) ->
   make cls: 'gw-clearer', prevSib: div
-  user = div.getAttribute 'data-user'
+  user = div.getAttribute('data-user')
   siteRepoName = "#{user}.github.com"
-  for repo in payload.data.sort((a, b) -> b.watchers - a.watchers)
+  limit = parseInt div.getAttribute('data-limit') or Infinity
+  sortBy = div.getAttribute('data-sortby') or 'watchers'
+  for repo in payload.data.sort((a, b) -> b[sortBy] - a[sortBy]).slice(0, limit)
     continue if repo.fork or repo.name is siteRepoName or not repo.description
     make parent: div, cls: 'gw-repo-outer', kids: [
       make cls: 'gw-repo', kids: [
@@ -36,7 +38,7 @@ init = ->
 # support functions
 
 cls = (el, opts = {}) ->  # cut-down version: no manipulation support
-  classHash = {}  
+  classHash = {}
   classes = el.className.match(cls.re)
   if classes?
     (classHash[c] = yes) for c in classes
@@ -48,7 +50,7 @@ cls = (el, opts = {}) ->  # cut-down version: no manipulation support
 
 cls.re = /\S+/g
 
-get = (opts = {}) ->  
+get = (opts = {}) ->
   inside = opts.inside ? document
   tag = opts.tag ? '*'
   if opts.id?
