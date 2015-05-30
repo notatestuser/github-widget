@@ -34,7 +34,7 @@ Set it up
 ---------
 
 To the `<head>` of the page, add:
-    
+
     <link href="github-widget/github-widget.css" rel="stylesheet" type="text/css" />
 
 At any page location where you want to show a GitHub repository, paste in:
@@ -42,6 +42,10 @@ At any page location where you want to show a GitHub repository, paste in:
     <div class="github-widget" data-user="some-github-username"></div>
 
 Replacing the value of the `data-user` attribute with an actual GitHub username.
+
+You may include additional `data-sortby` and/or `data-limit` attributes to customise your view:
+
+    <div class="github-widget" data-user="some-github-username" data-sortby="stargazers_count" data-limit="8"></div>
 
 Finally, immediately before the closing `</body>` tag, add:
 
