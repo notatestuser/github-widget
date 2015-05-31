@@ -46,7 +46,7 @@ Replacing the value of the `data-user` attribute with an actual GitHub username.
 You may include additional options in the form of a JSON hash in an attribute called `data-options`
 and the following options are currently supported: `sortBy`, `limit`, and `forks`.
 
-    <div class="github-widget" data-user="some-github-username" data-options='{"sortBy":"stargazers_count", "limit":6}'></div>
+    <div class="github-widget" data-user="some-github-username" data-options='{"limit":6, "sortBy":"stargazers_count", "forks":true}'></div>
 
 Finally, immediately before the closing `</body>` tag, add:
 
